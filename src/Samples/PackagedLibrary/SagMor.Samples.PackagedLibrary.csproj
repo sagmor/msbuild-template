@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Sample .Net NuGet package</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MultiFrameworkLibrary\SagMor.Samples.MultiFrameworkLibrary.csproj" />
+    <ProjectReference Include="..\SimpleLibrary\SagMor.Samples.SimpleLibrary.csproj" PrivateAssets="All" />
+
+    <!--
+      MSBuild has issues packaging cross project dlls:
+      https://github.com/NuGet/Home/issues/3891
+
+      This is one possible workaround but there are other options on the thread.
+    -->
+    <Content Include="$(OutputPath)\SagMor.Samples.SimpleLibrary.*">
+      <Pack>true</Pack>
+      <PackagePath>lib\net48</PackagePath>
+    </Content>
+  </ItemGroup>
+</Project>

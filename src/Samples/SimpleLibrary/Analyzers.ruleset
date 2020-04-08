@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Rules for StyleCop.Analyzers" Description="Code analysis rules" ToolsVersion="15.0">
+  <Include Path="..\..\Analyzers.ruleset" Action="Default" />
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <!-- We want to allow underscores on this project as a demonstration -->
+    <Rule Id="SA1309" Action="None" />
+  </Rules>
+</RuleSet>
