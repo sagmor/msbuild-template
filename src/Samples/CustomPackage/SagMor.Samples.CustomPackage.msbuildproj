@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.Build.NoTargets">
+    <PropertyGroup>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Content tag pushes to the content and contentFiles folders -->
+        <Content Include="assets\**\*.*" />
+
+        <!-- For custom paths use -->
+        <None Include="build\**\*.*">
+            <Pack>true</Pack>
+            <PackagePath>build\%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
+        </None>
+    </ItemGroup>
+</Project>

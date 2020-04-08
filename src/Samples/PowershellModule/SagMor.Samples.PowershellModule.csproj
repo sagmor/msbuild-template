@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Sample Powershell Module</Description>
+    <IsTool>true</IsTool>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PowerShellStandard.Library" Version="5.1.0"  PrivateAssets="All" />
+  </ItemGroup>
+
+  <Target Name="UpdateModuleManifest" AfterTargets="Build" DependsOnTargets="GetBuildVersion">
+    <ItemGroup>
+      <None Include="$(IntermediateOutputPath)\$(AssemblyName).psd1">
+        <Pack>true</Pack>
+        <PackagePath>$(AssemblyName).psd1</PackagePath>
+      </None>
+    </ItemGroup>
+
+    <Copy SourceFiles="$(AssemblyName).psd1" DestinationFiles="$(IntermediateOutputPath)\$(AssemblyName).psd1" />
+    <Exec Command="PowerShell.exe -Command &quot;Update-ModuleManifest -Path '$(IntermediateOutputPath)\$(AssemblyName).psd1' -ModuleVersion $(BuildVersionSimple) &quot;" />
+  </Target>
+
+</Project>
